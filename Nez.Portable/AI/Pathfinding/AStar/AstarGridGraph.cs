@@ -122,7 +122,7 @@ namespace Nez.AI.Pathfinding
 		double IAstarGraph<Point>.Heuristic(Point node, Point goal)
 		{
             double normal_cost = 1;
-            double diagonal_cost = 0;
+            double diagonal_cost = 1.141;
 
             int dmax = new List<int>() { Math.Abs(node.X - goal.X), Math.Abs(node.Y - goal.Y) }.Max();
             int dmin = new List<int>() { Math.Abs(node.X - goal.X), Math.Abs(node.Y - goal.Y) }.Min();
