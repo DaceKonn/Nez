@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Nez.Tiled;
-
+using System.Linq;
 
 namespace Nez.AI.Pathfinding
 {
@@ -15,13 +15,17 @@ namespace Nez.AI.Pathfinding
 		public List<Point> Dirs = new List<Point>
 		{
 			new Point(1, 0),
+			new Point(1, -1),
 			new Point(0, -1),
+			new Point(-1, -1),
 			new Point(-1, 0),
-			new Point(0, 1)
+			new Point(-1, 1),
+			new Point(0, 1),
+			new Point(1, 1),
 		};
 
 		public HashSet<Point> Walls = new HashSet<Point>();
-		public HashSet<Point> WeightedNodes = new HashSet<Point>();
+		//public HashSet<Point> WeightedNodes = new HashSet<Point>();
 		public int DefaultWeight = 1;
 		public int WeightedNodeWeight = 5;
 
@@ -90,14 +94,30 @@ namespace Nez.AI.Pathfinding
 			return _neighbors;
 		}
 
-		int IAstarGraph<Point>.Cost(Point from, Point to)
+		double IAstarGraph<Point>.Cost(Point from, Point to)
 		{
-			return WeightedNodes.Contains(to) ? WeightedNodeWeight : DefaultWeight;
+            
+            if (from.X != to.X && from.Y != to.Y)
+            {
+                return 1.141;
+            }
+            return 1;
+			//return WeightedNodes.Contains(to) ? WeightedNodeWeight : DefaultWeight;
 		}
 
-		int IAstarGraph<Point>.Heuristic(Point node, Point goal)
+		double IAstarGraph<Point>.Heuristic(Point node, Point goal)
 		{
-			return Math.Abs(node.X - goal.X) + Math.Abs(node.Y - goal.Y);
+            double normal_cost = 1;
+            double diagonal_cost = 0;
+
+            int dmax = new List<int>() { Math.Abs(node.X - goal.X), Math.Abs(node.Y - goal.Y) }.Max();
+            int dmin = new List<int>() { Math.Abs(node.X - goal.X), Math.Abs(node.Y - goal.Y) }.Min();
+
+            return Math.Floor(diagonal_cost * dmin + normal_cost * (dmax - dmin));
+            //return 0;
+            //return (int)Mathf.Sqrt((node.X - goal.X)^2 + (node.Y - goal.Y)^2);
+
+            //return Math.Abs(node.X - goal.X) + Math.Abs(node.Y - goal.Y);
 		}
 
 		#endregion

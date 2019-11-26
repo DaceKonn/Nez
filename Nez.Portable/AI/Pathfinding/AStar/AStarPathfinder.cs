@@ -28,7 +28,7 @@ namespace Nez.AI.Pathfinding
 			cameFrom = new Dictionary<T, T>();
 			cameFrom.Add(start, start);
 
-			var costSoFar = new Dictionary<T, int>();
+			var costSoFar = new Dictionary<T, double>();
 			var frontier = new PriorityQueue<AStarNode<T>>(1000);
 			frontier.Enqueue(new AStarNode<T>(start), 0);
 

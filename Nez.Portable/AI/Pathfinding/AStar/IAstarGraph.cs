@@ -20,13 +20,13 @@ namespace Nez.AI.Pathfinding
 		/// </summary>
 		/// <param name="from">From.</param>
 		/// <param name="to">To.</param>
-		int Cost(T from, T to);
+		double Cost(T from, T to);
 
 		/// <summary>
 		/// calculates the heuristic (estimate) to get from 'node' to 'goal'. See WeightedGridGraph for the common Manhatten method.
 		/// </summary>
 		/// <param name="node">Node.</param>
 		/// <param name="goal">Goal.</param>
-		int Heuristic(T node, T goal);
+		double Heuristic(T node, T goal);
 	}
 }

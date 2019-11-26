@@ -76,7 +76,7 @@ namespace System.Collections.Generic
 		/// O(log n)
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public void Enqueue(T node, int priority)
+		public void Enqueue(T node, double priority)
 		{
 			Insist.IsNotNull(node, "node cannot be null");
 			Insist.IsFalse(_numNodes >= _nodes.Length - 1, "Queue is full - node cannot be added: " + node);

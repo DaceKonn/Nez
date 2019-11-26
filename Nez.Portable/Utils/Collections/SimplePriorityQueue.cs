@@ -135,7 +135,7 @@
 		/// Duplicates are allowed.
 		/// O(log n)
 		/// </summary>
-		public void Enqueue(T item, int priority)
+		public void Enqueue(T item, double priority)
 		{
 			lock (_queue)
 			{

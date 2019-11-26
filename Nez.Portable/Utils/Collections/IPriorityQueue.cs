@@ -11,7 +11,7 @@
 		/// Enqueue a node to the priority queue.  Lower values are placed in front. Ties are broken by first-in-first-out.
 		/// See implementation for how duplicates are handled.
 		/// </summary>
-		void Enqueue(T node, int priority);
+		void Enqueue(T node, double priority);
 
 		/// <summary>
 		/// Removes the head of the queue (node with minimum priority; ties are broken by order of insertion), and returns it.
