@@ -88,7 +88,21 @@ namespace Nez.AI.Pathfinding
 			{
 				var next = new Point(node.X + dir.X, node.Y + dir.Y);
 				if (IsNodeInBounds(next) && IsNodePassable(next))
-					_neighbors.Add(next);
+                    if (next.X != node.X && next.Y != node.Y)
+                    {
+                        var dif = next - node;
+                        var a = IsNodePassable(new Point(node.X, node.Y + dif.Y));
+                        var b = IsNodePassable(new Point(node.X + dif.X, node.Y));
+
+                        if (a && b)
+                        {
+                            _neighbors.Add(next);
+                        } 
+                    }
+                    else
+                    {
+                        _neighbors.Add(next);
+                    }
 			}
 
 			return _neighbors;
